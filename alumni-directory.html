@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Directory</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="logo/logo-vbu.png">
+    <link rel="stylesheet" href="style10.css">
+</head>
+<body>
+
+    <header>
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="top-bar-left">
+                    <a class="brand-link" href="index.html">
+                        <img src="logo/logo-vbu.png" alt="VBU Logo">
+                        <span class="college-name">University College of Engineering & Technology</span>
+                    </a>
+                </div>
+                <div id="header-right-content" class="top-bar-right">
+                    <div class="social-links me-3">
+                        <a href="https://www.facebook.com/vbu.ucet/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/school/university-college-of-engineering-technology/people/?originalSubdomain=in" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <a href="login.html" class="btn btn-primary btn-sm">LOGIN</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="table-wrapper">
+            <div class="table-container">
+                <h2>List Of Alumni</h2>
+                <div class="breadcrumb">Home / List Of Alumni</div>
+                
+                <div class="table-scroll-container">
+                    <table class="alumni-table">
+                        <thead>
+                            <tr>
+                                <th>Sl.No.</th>
+                                <th>Name</th>
+                                <th>Course</th>
+                                <th>Session</th>
+                                <th>Occupation</th>
+                                <th>Current Organization/Company</th>
+                                <th>Designation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alumni-tbody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript is unchanged
+        document.addEventListener('DOMContentLoaded', () => {
+            const alumniList = JSON.parse(localStorage.getItem('alumniDirectory')) || [];
+            const tbody = document.getElementById('alumni-tbody');
+            if (alumniList.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No records found.</td></tr>';
+                return;
+            }
+            let rows = '';
+            alumniList.forEach((alumni, index) => {
+                rows += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${alumni.name}</td>
+                        <td>${alumni.course}</td>
+                        <td>${alumni.session}</td>
+                        <td>${alumni.occupation}</td>
+                        <td>${alumni.company}</td>
+                        <td>${alumni.designation}</td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = rows;
+        });
+    </script>
+</body>
+</html>

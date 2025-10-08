@@ -1,0 +1,95 @@
+/* --- Header Styles --- */
+
+/* Top Bar */
+.top-bar {
+    background-color: #ffffff;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 0.9rem;
+    position: fixed; /* <-- Add this */
+    width: 100%;    /* <-- Add this */
+    top: 0%;
+    z-index: 1000;
+}
+.top-bar .brand-link {
+    text-decoration: none;
+    color: #212529;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+.top-bar .brand-link img {
+    height: 40px;
+    margin-right: 12px;
+}
+.top-bar .social-links a {
+    color: var(--primary-color);
+    margin: 0 7px;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+.top-bar .social-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* Main Navigation Bar */
+.main-navbar {
+    background-color: var(--primary-color) !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: all 0.4s ease;
+    
+    /* --- Fixed Header Logic --- */
+    position: fixed; /* <-- Add this */
+    width: 100%;    /* <-- Add this */
+    top: 7%;
+    z-index: 1000;
+}
+.main-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    padding: 1.1rem;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-bottom: 3px solid transparent;
+    
+}
+.main-navbar .nav-link:hover,
+.main-navbar .nav-item.show .nav-link,
+.main-navbar .nav-link.active {
+    color: #f3db03;
+    background-color: rgba(97, 37, 37, 0.1);
+    border-bottom-color: var(--secondary-color);
+}
+
+.dropdown-menu {
+    border-radius: 0;
+    border: none;
+    margin-top: 0;
+    background-color: #0a213f; /* Slightly darker blue */
+}
+.dropdown-item {
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+.dropdown-item:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: o.78rem;
+}
+
+#header-right-content .dropdown-toggle::after {
+    display: none;
+}
+#header-right-content .btn {
+    font-weight: 600;
+}
+
+/* --- NEW: Dropdown on Hover for Desktop --- */
+@media (min-width: 992px) {
+    .main-navbar .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0; /* Ensures it's flush with the navbar */
+    }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Registration Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style10.css">
+</head>
+<body>
+
+    <header>
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="top-bar-left">
+                    <a class="brand-link" href="index.html">
+                        <img src="logo/logo-vbu.png" alt="VBU Logo">
+                        <span class="college-name">University College of Engineering & Technology</span>
+                    </a>
+                </div>
+                <div id="header-right-content" class="top-bar-right">
+                    <div class="social-links me-3">
+                        <a href="https://www.facebook.com/vbu.ucet/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/school/university-college-of-engineering-technology/people/?originalSubdomain=in" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <a href="login.html" class="btn btn-primary btn-sm">LOGIN</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-wrapper">
+            <div class="form-header">
+                <h4>Invitation to Alumni to provide information for Contact and Record</h4>
+            </div>
+            <form id="registration-form">
+                 <div class="form-grid">
+                    <div class="input-group"><label for="reg-no">University Registration No.</label><input type="text" id="reg-no"></div>
+                    <div class="input-group"><label for="mobile">Contact/Mobile No.</label><input type="text" id="mobile"></div>
+                    <div class="input-group"><label for="email">Email ID</label><input type="email" id="email"></div>
+                    <div class="input-group"><label for="name">Name</label><input type="text" id="name" required></div>
+                    <div class="input-group"><label for="department">Name of the Department</label><select id="department"><option value="">Select Department</option><option value="Computer Science & Engineering">Computer Science & Engineering</option><option value="Information Technology">Information Technology</option><option value="Mechanical Engineering">Mechanical Engineering</option><option value="Electronic and Communication Engineering">Electronic and Communication Engineering</option></select></div>
+                    <div class="input-group"><label for="session">Session</label><input type="text" id="session" placeholder="like 2015-2017" required></div>
+                    <div class="input-group"><label for="course">Course</label><select id="course" required><option value="">Select Course</option><option value="B.Tech">Bachelor of Technology</option></select></div>
+                    <div class="input-group"><label for="occupation">Present Occupation</label><input type="text" id="occupation" required></div>
+                    <div class="input-group"><label for="company">Current Organization / Company</label><input type="text" id="company" required></div>
+                    <div class="input-group"><label for="designation">Designation</label><input type="text" id="designation" required></div>
+                    <div class="input-group"><label>Gender</label><div class="radio-group"><input type="radio" id="male" name="gender" value="Male"> <label for="male">Male</label><input type="radio" id="female" name="gender" value="Female"> <label for="female">Female</label></div></div>
+                    <div class="input-group"><label for="photo">Photo</label><input type="file" id="photo"></div>
+                    <div class="input-group"><label for="signature">Signature</label><input type="file" id="signature"></div>
+                </div>
+                <h4 class="address-heading">Permanent Address</h4>
+                <div class="form-grid address-grid">
+                    <div class="input-group full-width"><label for="p-address">Address Line</label><input type="text" id="p-address"></div>
+                    <div class="input-group"><label for="p-pin">Pin</label><input type="text" id="p-pin"></div>
+                    <div class="input-group"><label for="p-district">District</label><input type="text" id="p-district"></div>
+                    <div class="input-group"><label for="p-state">State</label><input type="text" id="p-state"></div>
+                </div>
+                <div class="address-communication"><h4 class="address-heading">Address for Communication</h4><input type="checkbox" id="same-as-above"> <label for="same-as-above">Same as above</label></div>
+                <div class="form-grid address-grid">
+                    <div class="input-group full-width"><label for="c-address">Address Line</label><input type="text" id="c-address"></div>
+                    <div class="input-group"><label for="c-pin">Pin</label><input type="text" id="c-pin"></div>
+                    <div class="input-group"><label for="c-district">District</label><input type="text" id="c-district"></div>
+                    <div class="input-group"><label for="c-state">State</label><input type="text" id="c-state"></div>
+                </div>
+                <div class="submit-container"><button type="submit">Submit</button></div>
+                <div id="success-msg" class="success-message" style="display: none;">Registration successful! View the <a href="alumni-directory.html">Alumni List</a>.</div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript is unchanged
+        document.getElementById('same-as-above').addEventListener('change', function() {
+            const isChecked = this.checked;
+            const p_fields = ['p-address', 'p-pin', 'p-district', 'p-state'];
+            const c_fields = ['c-address', 'c-pin', 'c-district', 'c-state'];
+            for (let i = 0; i < p_fields.length; i++) {
+                const p_element = document.getElementById(p_fields[i]);
+                const c_element = document.getElementById(c_fields[i]);
+                c_element.value = isChecked ? p_element.value : ''; c_element.disabled = isChecked;
+            }
+        });
+        document.getElementById('registration-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const alumniData = {
+                name: document.getElementById('name').value, course: document.getElementById('course').value,
+                session: document.getElementById('session').value, occupation: document.getElementById('occupation').value,
+                company: document.getElementById('company').value, designation: document.getElementById('designation').value,
+            };
+            let alumniList = JSON.parse(localStorage.getItem('alumniDirectory')) || [];
+            alumniList.push(alumniData);
+            localStorage.setItem('alumniDirectory', JSON.stringify(alumniList));
+            document.getElementById('success-msg').style.display = 'block';
+            document.getElementById('registration-form').reset();
+        });
+    </script>
+</body>
+</html>

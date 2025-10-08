@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard | UCET, Hazaribag</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="header-style.css">
+</head>
+<body>
+
+   <header>
+        <div class="top-bar">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="top-bar-left">
+                    <a class="brand-link" href="index.html">
+                        <img src="logo/logo-vbu.png" alt="VBU Logo">
+                        <span class="college-name d-none d-lg-inline">University College of Engineering & Technology</span>
+                    </a>
+                </div>
+                <div id="header-right-content" class="top-bar-right d-flex align-items-center">
+                    <div class="social-links me-3">
+                        <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <a href="login.html" class="btn btn-primary btn-sm">LOGIN</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark main-navbar">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-5">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Staff Dashboard</h1>
+                <p class="col-md-8 fs-4">Welcome, Admin! Access administrative tools and manage college data from here.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center mb-3">
+                    <div class="card-body">
+                        <i class="fas fa-users-cog fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Manage Students</h5>
+                        <p class="card-text">View and edit student records.</p>
+                        <a href="student-management.html" class="btn btn-primary">Go to Student Management</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center mb-3">
+                    <div class="card-body">
+                        <i class="fas fa-file-upload fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Upload Grades</h5>
+                        <p class="card-text">Enter and update student grades.</p>
+                        <a href="grade.html" class="btn btn-success">Upload Grades</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center mb-3">
+                    <div class="card-body">
+                        <i class="fas fa-edit fa-3x text-info mb-3"></i>
+                        <h5 class="card-title">Post Notice</h5>
+                        <p class="card-text">Create and publish new notices.</p>
+                        <a href="post-notice.html" class="btn btn-info">Post a New Notice</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script-main.js"></script> 
+</body>
+</html>

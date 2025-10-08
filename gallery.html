@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | UCET, Hazaribag</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="logo/logo-vbu.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="header-style.css">
+    
+    <style>
+        /* Filter Buttons */
+        #filter-buttons .btn {
+            margin: 5px;
+            border-radius: 50px;
+            padding: 8px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        #filter-buttons .btn-outline-dark {
+            color: #343a40;
+            border-color: #343a40;
+        }
+        #filter-buttons .btn-outline-dark:hover,
+        #filter-buttons .btn-outline-dark.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Gallery Grid */
+        .gallery-item {
+            opacity: 0; 
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .gallery-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gallery-item .card {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .gallery-item .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        .gallery-item .card a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        .gallery-item .card a:hover {
+            cursor: zoom-in;
+        }
+
+        /* Modal */
+        #galleryModal .modal-content {
+            border-radius: 10px;
+        }
+        #galleryModal .modal-header {
+            border-bottom: none;
+        }
+        #galleryModal .modal-title {
+            font-weight: bold;
+        }
+        #galleryModal .modal-body img {
+            max-height: 80vh; 
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+
+   <header>
+        <div class="top-bar">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="top-bar-left">
+                    <a class="brand-link" href="index.html">
+                        <img src="logo/logo-vbu.png" alt="VBU Logo">
+                        <span class="college-name d-none d-lg-inline">University College of Engineering & Technology, Hazaribag</span>
+                    </a>
+                </div>
+                <div id="header-right-content" class="top-bar-right d-flex align-items-center">
+                    <div class="social-links me-3">
+                        <a href="https://www.facebook.com/vbu.ucet/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/school/university-college-of-engineering-technology/people/?originalSubdomain=in" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <a href="login.html" class="btn btn-primary btn-sm">LOGIN</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark main-navbar sticky-top">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                     <ul class="navbar-nav mx-auto" font-size="0.6em">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Activities</a>
+                             <ul class="dropdown-menu">
+                               
+                                <li><a class="dropdown-item" href="nss.html">NSS</a></li>
+                                <li><a class="dropdown-item" href="ncc.html">NCC</a></li>
+                                <li><a class="dropdown-item" href="cultural-fest.html">Cultural Fest</a></li>
+                                <li><a class="dropdown-item" href="coding-club.html">Coding Clubs</a></li>
+                            </ul>
+                          </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Departments</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="department.html">All B.Tech Departments</a></li>
+                                <li><a class="dropdown-item" href="department1.html">Other Departments</a></li>
+                                <li><a class="dropdown-item" href="ai-ml.html">B.sc AI/ML</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Administration</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="administration.html">Administration</a></li>
+                                <li><a class="dropdown-item" href="placement-cell.html">Traininng & Placement</a></li>
+                            </ul>
+                        </li>
+                
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Admissions</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="addmission-procedure.html">Admission Procedure</a></li>
+                                <li><a class="dropdown-item" href="admission-form.html">Admission Form</a></li>
+                                <li><a class="dropdown-item" href="fee-structure.html">Fee Structure</a></li>
+                            </ul>
+                        </li>
+                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Examinations</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="https://www.vbuuniv.in/vbuexamform/login">Exam Form</a></li>
+                                <li><a class="dropdown-item" href="syllabus.html">Syllabus</a></li>
+                                <li><a class="dropdown-item" href="result.html">Results</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Alumni</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="alumni-form.html">Alumni Registration</a></li>
+                                <li><a class="dropdown-item" href="alumni-directory.html">Alumni Directory</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">About VBU</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="https://www.vbu.ac.in/login">VBU Link</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="https://www.vbu.ac.in/about_us">About VBU</a></li>
+                                <li><a class="dropdown-item" href="https://www.vbu.ac.in/calendar">Calender</a></li>
+                                <li><a class="dropdown-item" href="https://www.vbu.ac.in/contactus">Contact us</a></li>
+                                <li><a class="dropdown-item" href="https://www.vbu.ac.in/gallery">Gallary</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero-slider" class="d-flex align-items-center justify-content-center" style="height:50vh; background-image: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070');">
+        <div class="text-center text-white">
+            <h1 class="display-3 fw-bold">Campus Glimpses</h1>
+            <p class="breadcrumb-text">Home / Gallery</p>
+        </div>
+    </section>
+
+    <main class="container content-section">
+        <div class="text-center section-title">
+            <h2 class="fw-bold">Our Photo Gallery</h2>
+            <p class="lead text-muted">A visual journey through our vibrant college life and events.</p>
+        </div>
+
+        <div id="filter-buttons" class="text-center mb-5">
+            <button class="btn btn-outline-dark active" data-filter="all">All</button>
+            <button class="btn btn-outline-dark" data-filter="campus">Campus Life</button>
+            <button class="btn btn-outline-dark" data-filter="events">Events</button>
+            <button class="btn btn-outline-dark" data-filter="academics">Academics</button>
+        </div>
+
+        <div class="row g-4" id="gallery-grid">
+            <!-- Images will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="galleryModalLabel">Gallery Image</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img src="" class="img-fluid" id="modalImage" alt="Gallery Image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <img src="logo/logo-vbu.png" alt="VBU Logo" style="height: 60px; margin-bottom: 15px;">
+                    <h5 class="text-white">University College of Engineering Technology<br>
+                        Vinoba Bhave University(Hazaribag)</h5>
+                    <p>Ranchi, Patna Road, NH - 33, Hazaribagh, Jharkhand - 825301</p>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="administration.html">Administration</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white">Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-phone me-2"></i> 05646-261929</li>
+                        <li><i class="fas fa-envelope me-2"></i> vbuucet@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Connect With Us</h5>
+                    <a href="https://www.facebook.com/vbu.ucet/" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/school/university-college-of-engineering-technology/people/?originalSubdomain=in" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://x.com/NssVbu" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/ucetvbu2009/?hl=en" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center py-3">
+            <p class="mb-0">&copy; 2025 University College of Engineering Technology, Hazaribag. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = [
+                { src: 'images/bg1.jpg', category: 'campus', title: 'UCET' },
+                { src: 'images/bg-4.jpg', category: 'campus', title: 'VBU Campus' },
+                { src: 'images/bg-10.jpg', category: 'campus', title: 'VBU Main Gate Front' },
+                { src: 'images/bg-9.jpg', category: 'campus', title: 'VBU Main Gate Back' },
+                { src: 'images/bg-8.jpg', category: 'campus', title: 'VBU Campus ' },
+                { src: 'images/bg-6.jpg', category: 'campus', title: 'VBU Park' },
+                { src: 'images/bg-7.jpg', category: 'campus', title: 'VBU Park and Guest House' },
+                { src: 'images/bg-5.jpg', category: 'campus', title: 'VBU Main Office' },
+                { src: 'images/image-5.jpg', category: 'events', title: 'Vibrant Fresher\'s Welcome' },
+                { src: 'images/image-0.jpg', category: 'academics', title: 'Focused Study Session' },
+                { src: 'images/bg2.jpg', category: 'campus', title: 'Lush Campus Greenery' },
+                { src: 'images/image-9.jpg', category: 'academics', title: 'Engaging Lecture Hall' },
+                { src: 'images/image-3.jpg', category: 'events', title: 'Annual Cultural Fest' },
+                { src: 'images/image-2.jpg', category: 'campus', title: 'Modern Library Interior' },
+                { src: 'images/image-1.jpg', category: 'academics', title: 'Interactive Classroom' },
+                { src: 'images/image-10.jpg', category: 'campus', title: 'Evening Campus Glow' },
+                { src: 'images/image-6.jpg', category: 'events', title: 'Sports Day Fun' },
+                { src: 'images/image-4.jpg', category: 'academics', title: 'Science Lab Experiment' },
+                { src: 'images/image-9.jpg', category: 'campus', title: 'Student Dormitory' },
+            ];
+
+            const galleryGrid = document.getElementById('gallery-grid');
+            const filterButtons = document.querySelectorAll('#filter-buttons .btn');
+            const galleryModal = new bootstrap.Modal(document.getElementById('galleryModal'));
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('galleryModalLabel');
+
+            function displayImages(filter = 'all') {
+                galleryGrid.innerHTML = '';
+                const filteredImages = (filter === 'all') ? images : images.filter(img => img.category === filter);
+
+                filteredImages.forEach(image => {
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'col-lg-4 col-md-6 gallery-item'; 
+                    
+                    imageContainer.innerHTML = `
+                        <div class="card h-100 shadow-sm border-0">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img-src="${image.src}" data-img-title="${image.title}">
+                                <img src="${image.src}" class="card-img-top" alt="${image.title}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/FFFFFF?text=Image+Not+Found';">
+                            </a>
+                        </div>
+                    `;
+                    galleryGrid.appendChild(imageContainer);
+                });
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.gallery-item').forEach(item => {
+                        item.classList.add('show');
+                    });
+                }, 50);
+            }
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const filterValue = this.getAttribute('data-filter');
+                    displayImages(filterValue);
+                });
+            });
+
+            document.getElementById('galleryModal').addEventListener('show.bs.modal', function (event) {
+                const triggerLink = event.relatedTarget;
+                const imageSrc = triggerLink.getAttribute('data-img-src');
+                const imageTitle = triggerLink.getAttribute('data-img-title');
+                
+                modalImage.src = imageSrc;
+                modalImage.alt = imageTitle;
+                modalTitle.textContent = imageTitle;
+            });
+
+            displayImages('all');
+        });
+    </script>
+</body>
+</html>
